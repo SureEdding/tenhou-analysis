@@ -6,7 +6,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.sql.rowset.BaseRowSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +45,9 @@ public class XmlAnalysisService {
 
     private void processNode(NamedNodeMap map, String nodeName) {
         if (nodeName.equals("SHUFFLE")) {
+
         } else if (nodeName.equals("GO")) {
+
         } else if (nodeName.equals("UN")) {
         } else if (nodeName.equals("TAIKYOKU")) {
         } else if (nodeName.equals("INIT")) {
