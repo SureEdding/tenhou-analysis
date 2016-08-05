@@ -2,6 +2,7 @@ package org.suree.model;
 
 import org.suree.constant.Mode;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public class TaiKyoKu {
     private String player1;
     private String player2;
     private String player3;
-    private List<Round> results;
+    private LinkedList<Round> results = new LinkedList<Round>();
 
 
     public String getYama() {
@@ -75,11 +76,11 @@ public class TaiKyoKu {
         this.player3 = player3;
     }
 
-    public List<Round> getResults() {
+    public LinkedList<Round> getResults() {
         return results;
     }
 
-    public void setResults(List<Round> results) {
+    public void setResults(LinkedList<Round> results) {
         this.results = results;
     }
 }

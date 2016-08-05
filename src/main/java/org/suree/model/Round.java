@@ -4,7 +4,9 @@ import org.suree.constant.Ryukyoku;
 import org.suree.constant.Yaku;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Sure on 8/4/16.
@@ -35,7 +37,12 @@ public class Round {
     /**
      * 点数变化(正为赢点,负为输点)
      */
-    private List<Double> tens;
+    private Map<Integer,Integer> tens = new HashMap<Integer, Integer>();
+
+    /**
+     * 初始点数
+     */
+    private Map<Integer,Integer> initTens = new HashMap<Integer, Integer>();
 
     /**
      * 是否流局
@@ -48,9 +55,14 @@ public class Round {
     private Ryukyoku ryukyokuType;
 
     /**
+     * 是否和牌
+     */
+    private Boolean isAgari;
+
+    /**
      * 役
      */
-    private List<List<Yaku>> Yakus;
+    private List<List<Yaku>> Yakus = new ArrayList<List<Yaku>>();
 
     /**
      * 本场棒
@@ -65,7 +77,7 @@ public class Round {
     /**
      * 副露
      */
-    private List<Fuuru> fuurus;
+    private List<Fuuru> fuurus = new ArrayList<Fuuru>();
 
 
     //TODO 摸牌,切牌,符数的记录
@@ -103,11 +115,11 @@ public class Round {
         this.fromWho = fromWho;
     }
 
-    public List<Double> getTens() {
+    public Map<Integer, Integer> getTens() {
         return tens;
     }
 
-    public void setTens(List<Double> tens) {
+    public void setTens(Map<Integer, Integer> tens) {
         this.tens = tens;
     }
 
@@ -157,5 +169,21 @@ public class Round {
 
     public void setFuurus(List<Fuuru> fuurus) {
         this.fuurus = fuurus;
+    }
+
+    public Map<Integer, Integer> getInitTens() {
+        return initTens;
+    }
+
+    public void setInitTens(Map<Integer, Integer> initTens) {
+        this.initTens = initTens;
+    }
+
+    public Boolean getAgari() {
+        return isAgari;
+    }
+
+    public void setAgari(Boolean agari) {
+        isAgari = agari;
     }
 }
