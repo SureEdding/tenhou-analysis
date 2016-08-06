@@ -1,6 +1,7 @@
 package org.suree.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.suree.model.TaiKyoKu;
 import org.suree.service.XmlAnalysisService;
@@ -28,13 +29,15 @@ public class TenhouController {
 
 
     @RequestMapping("/analysis/test")
-    public Map<String, Object> analysisTest() {
+    public Map<String, Object> analysisTest(@RequestParam(value = "log", required = false, defaultValue = "2011020417gm-00a9-0000-b67fcaa3")String logCode) {
         Map<String, Object> result = new HashMap<String, Object>();
-        Document paihouDoc = xmlReadService.getXmlFile("/Users/Sure/code/2011020417gm-00a9-0000-b67fcaa3.xml");
+        String path = "/Users/Sure/code/my_log/";
+        Document paihouDoc = xmlReadService.getXmlFile(path + logCode + ".xml");
         TaiKyoKu taiKyoKu = xmlAnalysisService.analysisDocument(paihouDoc);
         result.put("data", taiKyoKu);
         return result;
     }
+
 
 
 
