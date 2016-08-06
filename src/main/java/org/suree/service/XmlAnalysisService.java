@@ -24,6 +24,14 @@ import java.util.*;
 public class XmlAnalysisService {
 
 
+    public List<TaiKyoKu> analysisDocuments(List<Document> documents) {
+        Iterator<Document> iterator = documents.iterator();
+        List<TaiKyoKu> taiKyoKus = new ArrayList<TaiKyoKu>();
+        while (iterator.hasNext()) {
+            taiKyoKus.add(analysisDocument(iterator.next()));
+        }
+        return taiKyoKus;
+    }
 
     public TaiKyoKu analysisDocument(Document doc) {
         NodeList element = doc.getElementsByTagName("mjloggm");

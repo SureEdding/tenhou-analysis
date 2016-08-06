@@ -45,8 +45,8 @@ public class TenhouController {
     }
 
 
-    @RequestMapping("/paifu/remoteGet")
-    public Map<String, Object> paifuGet(){
+    @RequestMapping("/paifu/remoteGet/test")
+    public Map<String, Object> paifuGetTest(){
         List<String> logCodes = new ArrayList<String>();
         logCodes.add("2016050720gm-0001-0000-f77a2431");
         logCodes.add("2016072020gm-00c1-0000-e0f49746");
@@ -58,24 +58,27 @@ public class TenhouController {
         logCodes.add("2016072323gm-0009-1022-3e77685a");
         logCodes.add("2016072400gm-0009-1022-85e8f4e4");
         logCodes.add("2016071022gm-0089-0000-ead7674a");
-        logCodes.add("2016050720gm-0001-0000-f77a2431");
-        logCodes.add("2016072020gm-00c1-0000-e0f49746");
-        logCodes.add("2016072020gm-0089-0000-e83a8b43");
-        logCodes.add("2016072101gm-0089-0000-0a870c91");
-        logCodes.add("2016072223gm-0009-5770-d6ddf3d6");
-        logCodes.add("2016072316gm-0089-0000-0b7b37ca");
-        logCodes.add("2016072316gm-0089-0000-9bf292a3");
-        logCodes.add("2016072323gm-0009-1022-3e77685a");
-        logCodes.add("2016072400gm-0009-1022-85e8f4e4");
-        logCodes.add("2016071022gm-0089-0000-ead7674a");
+
+//        logCodes.add("2016050720gm-0001-0000-f77a2431");
+//        logCodes.add("2016072020gm-00c1-0000-e0f49746");
+//        logCodes.add("2016072020gm-0089-0000-e83a8b43");
+//        logCodes.add("2016072101gm-0089-0000-0a870c91");
+//        logCodes.add("2016072223gm-0009-5770-d6ddf3d6");
+//        logCodes.add("2016072316gm-0089-0000-0b7b37ca");
+//        logCodes.add("2016072316gm-0089-0000-9bf292a3");
+//        logCodes.add("2016072323gm-0009-1022-3e77685a");
+//        logCodes.add("2016072400gm-0009-1022-85e8f4e4");
+//        logCodes.add("2016071022gm-0089-0000-ead7674a");
 
         long start = System.currentTimeMillis();
         List<String> xmls = remotePaifuParseService.parseRemotePaifuWithLogCodeList(logCodes);
         long elapsedTime = System.currentTimeMillis() - start;
 
+        List<Document> documents = xmlReadService.convertToDocuments(xmls);
+        List<TaiKyoKu> taiKyoKus = xmlAnalysisService.analysisDocuments(documents);
         Map results = new HashMap();
         results.put("time", elapsedTime/1000);
-        results.put("data", xmls);
+        results.put("data", taiKyoKus);
         return results;
     }
 
