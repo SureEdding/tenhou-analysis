@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.suree.constant.Mode;
 import org.suree.constant.Ryukyoku;
 import org.suree.constant.Yaku;
+import org.suree.model.Fuuru;
 import org.suree.model.Round;
 import org.suree.model.TaiKyoKu;
 import org.w3c.dom.Document;
@@ -126,6 +127,14 @@ public class XmlAnalysisService {
                 /**
                  * 副露
                  */
+                Round round = taiKyoKu.getResults().getLast();
+                Node who = map.getNamedItem("who");
+                Node m = map.getNamedItem("m");
+
+                Fuuru fuuru = new Fuuru();
+                fuuru.setCode(Integer.parseInt(m.getNodeValue()));
+                fuuru.setWho(Integer.parseInt(who.getNodeValue()));
+                round.getFuurus().add(fuuru);
 
             } else if (nodeName.equals("RYUUKYOKU")) {
                 /**
