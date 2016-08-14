@@ -1,6 +1,5 @@
 package org.suree.service;
 
-import javafx.beans.binding.DoubleExpression;
 import org.springframework.cglib.core.Predicate;
 import org.springframework.stereotype.Service;
 import org.suree.constant.Yaku;
