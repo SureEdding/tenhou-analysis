@@ -38,6 +38,7 @@ public class RemotePaifuParseService {
                 HttpGet request = new HttpGet(tempPath);
                 HttpResponse response = httpclient.execute(request);
 
+                //TODO 404 handle
                 BufferedReader rd = new BufferedReader(
                         new InputStreamReader(response.getEntity().getContent()));
 
@@ -46,7 +47,9 @@ public class RemotePaifuParseService {
                 while ((line = rd.readLine()) != null) {
                     result.append(line);
                 }
-                xmls.add(result.toString());
+                if (!result.toString().equals("")) {
+                    xmls.add(result.toString());
+                }
             }
         } catch (Exception e) {
             //todo error handle
