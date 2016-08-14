@@ -33,6 +33,27 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  <filter>
+    <filter-name>cross-origin</filter-name>
+    <filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>
+    <init-param>
+      <param-name>allowedOrigins</param-name>
+      <param-value>*</param-value>
+    </init-param>
+    <init-param>
+      <param-name>allowedMethods</param-name>
+      <param-value>GET,POST,HEAD</param-value>
+    </init-param>
+    <init-param>
+      <param-name>allowedHeaders</param-name>
+      <param-value>X-Requested-With,Content-Type,Accept,Origin</param-value>
+    </init-param>
+  </filter>
+  <!-- 此处表示jetty中的所有url都可以支持跨域 -->
+  <filter-mapping>
+    <filter-name>cross-origin</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>
@@ -53,6 +74,7 @@
     <extension>ico</extension>
     <mime-type>image/x-icon</mime-type>
   </mime-mapping>
+
 
 
 </web-app>
