@@ -15,6 +15,8 @@ public class StaticsResultModel {
     private Double avAgariPoints;
     private Double avjyuPoints;
     private Double ryukyokuRate;
+    private String userName;
+    private Double avRank;
 
     public Map<Integer, Double> getYakusRate() {
         return yakusRate;
@@ -79,4 +81,21 @@ public class StaticsResultModel {
     public void setRyukyokuRate(Double ryukyokuRate) {
         this.ryukyokuRate = ryukyokuRate;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Double getAvRank() {
+        return avRank;
+    }
+
+    public void setAvRank(Double avRank) {
+        this.avRank = avRank;
+    }
 }
+

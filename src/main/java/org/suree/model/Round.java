@@ -62,7 +62,7 @@ public class Round {
     /**
      * 役
      */
-    private List<List<Yaku>> Yakus = new ArrayList<List<Yaku>>();
+    private Map<Integer ,List<Yaku>> Yakus = new HashMap<Integer, List<Yaku>>();
 
     /**
      * 本场棒
@@ -139,11 +139,11 @@ public class Round {
         this.ryukyokuType = ryukyokuType;
     }
 
-    public List<List<Yaku>> getYakus() {
+    public Map<Integer ,List<Yaku>> getYakus() {
         return Yakus;
     }
 
-    public void setYakus(List<List<Yaku>> yakus) {
+    public void setYakus(Map<Integer ,List<Yaku>> yakus) {
         Yakus = yakus;
     }
 

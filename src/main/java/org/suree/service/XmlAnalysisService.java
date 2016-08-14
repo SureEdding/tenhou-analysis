@@ -224,12 +224,12 @@ public class XmlAnalysisService {
                     for (int i = 0; i < yakus.length; i += 2) {
                         yakuList.add(Yaku.getByCode(Integer.parseInt(yakus[i])));
                     }
-                    round.getYakus().add(yakuList);
+                    round.getYakus().put(Integer.parseInt(who.getNodeValue()),yakuList);
                 } else if (yakuman != null) {
                     //TODO 双重役满
                     List<Yaku> yakumans = new ArrayList<Yaku>();
                     yakumans.add(Yaku.getByCode(Integer.parseInt(yakuman.getNodeValue())));
-                    round.getYakus().add(yakumans);
+                    round.getYakus().put(Integer.parseInt(who.getNodeValue()),yakumans);
                 }
 
                 round.getWho().add(Integer.parseInt(who.getNodeValue()));

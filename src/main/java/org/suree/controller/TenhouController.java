@@ -66,16 +66,6 @@ public class TenhouController {
         logCodes.add("2016072400gm-0009-1022-85e8f4e4");
         logCodes.add("2016071022gm-0089-0000-ead7674a");
 
-//        logCodes.add("2016050720gm-0001-0000-f77a2431");
-//        logCodes.add("2016072020gm-00c1-0000-e0f49746");
-//        logCodes.add("2016072020gm-0089-0000-e83a8b43");
-//        logCodes.add("2016072101gm-0089-0000-0a870c91");
-//        logCodes.add("2016072223gm-0009-5770-d6ddf3d6");
-//        logCodes.add("2016072316gm-0089-0000-0b7b37ca");
-//        logCodes.add("2016072316gm-0089-0000-9bf292a3");
-//        logCodes.add("2016072323gm-0009-1022-3e77685a");
-//        logCodes.add("2016072400gm-0009-1022-85e8f4e4");
-//        logCodes.add("2016071022gm-0089-0000-ead7674a");
         long start = System.currentTimeMillis();
         List<String> xmls = new ArrayList<String>();
         List<String > results = new ArrayList<String>();
@@ -120,7 +110,6 @@ public class TenhouController {
         }
 
         results.put("username", request.getUsername());
-
         return results;
     }
 
