@@ -5,10 +5,7 @@ import org.suree.Utils.LogCodesValidator;
 import org.suree.model.Request;
 import org.suree.model.StaticsResultModel;
 import org.suree.model.TaiKyoKu;
-import org.suree.service.RemotePaifuParseService;
-import org.suree.service.StaticsService;
-import org.suree.service.XmlAnalysisService;
-import org.suree.service.XmlReadService;
+import org.suree.service.*;
 import org.w3c.dom.Document;
 
 import javax.annotation.Resource;
@@ -40,6 +37,9 @@ public class TenhouController {
 
     @Resource
     private StaticsService staticsService;
+
+    @Resource
+    private TaiKyokuDao taiKyokuDao;
 
     @RequestMapping("/analysis/test")
     public Map<String, Object> analysisTest(@RequestParam(value = "log", required = false, defaultValue = "2011020417gm-00a9-0000-b67fcaa3")String logCode) {
@@ -110,6 +110,9 @@ public class TenhouController {
         }
 
         results.put("username", request.getUsername());
+
+        results.put("database", taiKyokuDao.selectById(1));
+
         return results;
     }
 

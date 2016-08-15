@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!--建议加Name属性，方便监控报警，如果多个dataSource，主要的dataSource Name为default-->
+        <property name="name" value="default"/>
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${jdbc_url}"/>
+        <property name="username" value="${jdbc_username}"/>
+        <!--<property name="password" ref="dbPassword"/>-->
+        <property name="password" value="${jdbc_password}"/>
+
+        <property name="driverClassName" value="${jdbc_driver}"/>
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${jdbc_initialSize}"/>
+        <property name="minIdle" value="${jdbc_minIdle}"/>
+        <property name="maxActive" value="${jdbc_maxActive}"/>
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${jdbc_maxWait}"/>
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc_timeBetweenEvictionRunsMillis}"/>
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${jdbc_minEvictableIdleTimeMillis}"/>
+
+        <property name="testWhileIdle" value="${jdbc_testWhileIdle}"/>
+        <property name="testOnBorrow" value="${jdbc_testOnBorrow}"/>
+        <property name="validationQuery" value="${jdbc_validationQuery}"/>
+        <!-- 如果需要支持utf8mb4编码的话打开 -->
+        <!--<property name="connectionInitSqls" value="${jdbc_connectionInitSqls}"/>-->
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 配置扫描Domain的包路径 -->
+        <property name="typeAliasesPackage" value="org.suree.domain"/>
+        <!-- 配置mybatis配置文件的位置 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!-- 配置扫描Mapper XML的位置 -->
+        <property name="mapperLocations"
+                  value="classpath:TaiKyokuTableMapper.xml"/>
+    </bean>
+
+    <!-- 配置扫描Mapper接口的包路径 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.suree.mappers"/>
+        <!--<property name="annotationClass" value="org.springframework.stereotype.Repository"/>-->
+    </bean>
+
+    <!--<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">-->
+        <!--<constructor-arg ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+</beans>

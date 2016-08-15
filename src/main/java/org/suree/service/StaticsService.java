@@ -96,6 +96,9 @@ public class StaticsService {
         model.setJyuRate(jyu/roundCount);
         model.setAvjyuPoints(jyuPoints/jyu);
         model.setRyukyokuRate(ryukyoku/roundCount);
+        model.setTaikyokuCount(((Double)taiCount).intValue());
+        model.setRoundCount(((Double)roundCount).intValue());
+
 
         for (int i = 0; i < 55; i++) {
             model.getYakusRate().put(i, model.getYakusRate().get(i)/agari);
