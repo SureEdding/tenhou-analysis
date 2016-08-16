@@ -1,6 +1,7 @@
 package org.suree.service;
 
 import org.springframework.stereotype.Service;
+import org.suree.model.Xml;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 
@@ -36,20 +37,20 @@ public class XmlReadService {
         }
         return null;
     }
-    public List<Document> convertToDocuments(List<String> xmls) {
+    public List<Document> convertToDocuments(List<Xml> xmls) {
         List<Document> documents = new ArrayList<Document>();
         if (xmls == null || xmls.isEmpty()) {
             return documents;
         }
         try {
             DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Iterator<String> i = xmls.iterator();
+            Iterator<Xml> i = xmls.iterator();
             while (i.hasNext()) {
-                String xml = i.next();
-                InputSource is = new InputSource();
-                is.setCharacterStream(new StringReader(xml));
-                Document doc = db.parse(is);
-                documents.add(doc);
+                String xml = i.next().getXml();
+                Document document = convertToDocument(xml, db);
+                if (document != null) {
+                    documents.add(document);
+                }
             }
         } catch (Exception e) {
             //TODO error handle
@@ -57,6 +58,13 @@ public class XmlReadService {
         }
         return documents;
     }
-
-
+    public Document convertToDocument(String xml, DocumentBuilder builder) {
+        try {
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(xml));
+            return builder.parse(is);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
