@@ -4,37 +4,46 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <!--建议加Name属性，方便监控报警，如果多个dataSource，主要的dataSource Name为default-->
-        <property name="name" value="default"/>
-        <!-- 基本属性 url、user、password -->
-        <property name="url" value="${jdbc_url}"/>
-        <property name="username" value="${jdbc_username}"/>
-        <!--<property name="password" ref="dbPassword"/>-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc_driver}"/>
+        <property name="jdbcUrl" value="${jdbc_url}"/>
+        <property name="user" value="${jdbc_username}"/>
         <property name="password" value="${jdbc_password}"/>
-
-        <property name="driverClassName" value="${jdbc_driver}"/>
-
-        <!-- 配置初始化大小、最小、最大 -->
-        <property name="initialSize" value="${jdbc_initialSize}"/>
-        <property name="minIdle" value="${jdbc_minIdle}"/>
-        <property name="maxActive" value="${jdbc_maxActive}"/>
-
-        <!-- 配置获取连接等待超时的时间 -->
-        <property name="maxWait" value="${jdbc_maxWait}"/>
-
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-        <property name="timeBetweenEvictionRunsMillis" value="${jdbc_timeBetweenEvictionRunsMillis}"/>
-
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-        <property name="minEvictableIdleTimeMillis" value="${jdbc_minEvictableIdleTimeMillis}"/>
-
-        <property name="testWhileIdle" value="${jdbc_testWhileIdle}"/>
-        <property name="testOnBorrow" value="${jdbc_testOnBorrow}"/>
-        <property name="validationQuery" value="${jdbc_validationQuery}"/>
-        <!-- 如果需要支持utf8mb4编码的话打开 -->
-        <!--<property name="connectionInitSqls" value="${jdbc_connectionInitSqls}"/>-->
+        <property name="maxPoolSize" value="50"/>
+        <property name="minPoolSize" value="2"/>
+        <property name="maxIdleTime" value="60"/>
     </bean>
+    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">-->
+        <!--&lt;!&ndash;建议加Name属性，方便监控报警，如果多个dataSource，主要的dataSource Name为default&ndash;&gt;-->
+        <!--<property name="name" value="default"/>-->
+        <!--&lt;!&ndash; 基本属性 url、user、password &ndash;&gt;-->
+        <!--<property name="url" value="${jdbc_url}"/>-->
+        <!--<property name="username" value="${jdbc_username}"/>-->
+        <!--&lt;!&ndash;<property name="password" ref="dbPassword"/>&ndash;&gt;-->
+        <!--<property name="password" value="${jdbc_password}"/>-->
+
+        <!--<property name="driverClassName" value="${jdbc_driver}"/>-->
+
+        <!--&lt;!&ndash; 配置初始化大小、最小、最大 &ndash;&gt;-->
+        <!--<property name="initialSize" value="${jdbc_initialSize}"/>-->
+        <!--<property name="minIdle" value="${jdbc_minIdle}"/>-->
+        <!--<property name="maxActive" value="${jdbc_maxActive}"/>-->
+
+        <!--&lt;!&ndash; 配置获取连接等待超时的时间 &ndash;&gt;-->
+        <!--<property name="maxWait" value="${jdbc_maxWait}"/>-->
+
+        <!--&lt;!&ndash; 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="${jdbc_timeBetweenEvictionRunsMillis}"/>-->
+
+        <!--&lt;!&ndash; 配置一个连接在池中最小生存的时间，单位是毫秒 &ndash;&gt;-->
+        <!--<property name="minEvictableIdleTimeMillis" value="${jdbc_minEvictableIdleTimeMillis}"/>-->
+
+        <!--<property name="testWhileIdle" value="${jdbc_testWhileIdle}"/>-->
+        <!--<property name="testOnBorrow" value="${jdbc_testOnBorrow}"/>-->
+        <!--<property name="validationQuery" value="${jdbc_validationQuery}"/>-->
+        <!--&lt;!&ndash; 如果需要支持utf8mb4编码的话打开 &ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="connectionInitSqls" value="${jdbc_connectionInitSqls}"/>&ndash;&gt;-->
+    <!--</bean>-->
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
