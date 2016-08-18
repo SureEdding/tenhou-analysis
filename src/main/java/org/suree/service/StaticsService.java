@@ -64,12 +64,13 @@ public class StaticsService {
                             model.getYakusRate().put(yaku.getCode(), temp);
                         }
 
-                    } else if (round.getFromWho().equals(position)) {
+                    } else if (round.getFromWho().equals(position) && !round.getWho().contains(position)) {
                         //主视角铳了
                         jyu++;
-                        for (Map.Entry<Integer, Integer> entry : round.getTens().entrySet()) {
-                            jyuPoints += entry.getValue().doubleValue();
-                        }
+//                        for (Map.Entry<Integer, Integer> entry : round.getTens().entrySet()) {
+//                            jyuPoints += entry.getValue().doubleValue();
+//                        }
+                        jyuPoints += round.getTens().get(position).doubleValue() * -1;
                     }
                 } else if (round.getRyukyoku()) {
                     ryukyoku++;
